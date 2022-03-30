@@ -1,14 +1,20 @@
-version: '2'
-
+version: "2"
 services:
   nginx-proxy:
     image: jwilder/nginx-proxy
+    container_name: nginx-proxy
+    restart: always
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-
-  whoami:
-    image: jwilder/whoami
+  app1:
+    build: app1/
     environment:
-      - VIRTUAL_HOST=whoami.local
+      - VIRTUAL_HOST=app1.localhost
+
+  app2:
+    build: app2/
+    environment:
+      - VIRTUAL_HOST=app2.localhost
