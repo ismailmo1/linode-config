@@ -9,12 +9,3 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-  app1:
-    build: app1/
-    environment:
-      - VIRTUAL_HOST=app1.localhost
-
-  app2:
-    build: app2/
-    environment:
-      - VIRTUAL_HOST=app2.localhost
