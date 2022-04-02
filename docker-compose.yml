@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 services:
   nginx-proxy:
     image: jwilder/nginx-proxy
@@ -9,3 +9,22 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+  nginx-proxy-acme:
+    image: nginxproxy/acme-companion
+    container_name: acme-companion
+    volumes:
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
+    environment:
+      - DEFAULT_EMAIL=ismailmo4@gmail.com
+
+volumes:
+  certs:
+  vhost:
+  html:
+  acme:
