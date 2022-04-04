@@ -20,9 +20,10 @@ services:
       - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - DEFAULT_EMAIL=ismailmo4@gmail.com
-
+      - NGINX_PROXY_CONTAINER=nginx-proxy
 volumes:
   certs:
   vhost:
